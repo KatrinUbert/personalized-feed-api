@@ -1,0 +1,54 @@
+{
+  "measured_on": "2026-10-16",
+  "data_kind": "synthetic",
+  "seed": 42,
+  "dataset": {
+    "users": 120,
+    "posts": 360,
+    "interactions": 21600,
+    "days": 30,
+    "sha256": "dce0562eba4bc0a38c50d7af4763b1bd1aae4694a6fc12e9368086ae76c531b1"
+  },
+  "cutoff": "2025-01-25T00:00:00",
+  "train_events": 17280,
+  "holdout_events": 4320,
+  "catalog_at_cutoff": 340,
+  "model": "CatBoostClassifier",
+  "parameters": {
+    "iterations": 180,
+    "depth": 5,
+    "learning_rate": 0.07,
+    "random_seed": 42,
+    "thread_count": 2
+  },
+  "versions": {
+    "python": "3.12.14",
+    "catboost": "1.2.10",
+    "scikit_learn": "1.9.1",
+    "pandas": "2.3.3",
+    "numpy": "2.5.4"
+  },
+  "metrics": {
+    "k": 10,
+    "evaluated_users": 120,
+    "mean_candidates": 196.0,
+    "mean_relevant_posts": 7.9,
+    "catboost": {
+      "recall_at_k": 0.195978280978281,
+      "hit_rate_at_k": 0.85
+    },
+    "popularity": {
+      "recall_at_k": 0.06803217615717615,
+      "hit_rate_at_k": 0.44166666666666665
+    },
+    "impression_roc_auc": 0.8836632515476703,
+    "impression_average_precision": 0.7483721164162332
+  },
+  "commands": [
+    "feedrec generate --users 120 --posts 360 --days 30 --seed 42",
+    "feedrec import",
+    "feedrec train --cutoff 2025-01-25 --iterations 180 --seed 42 --k 10",
+    "feedrec recommend --user-id 7 --k 5"
+  ],
+  "interpretation": "Frozen-snapshot offline ranking on synthetic impressions; no measured production CTR, retention or financial uplift."
+}

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "personalized-feed-api"
+version = "0.1.0"
+description = "Chronological post ranking with CatBoost and FastAPI"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "scikit-learn>=1.5,<2",
+  "catboost>=1.2.7,<2",
+  "SQLAlchemy>=2.0,<3",
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.30,<1",
+  "joblib>=1.4,<2",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.2,<4"]
+
+[project.scripts]
+feedrec = "feedrec.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
